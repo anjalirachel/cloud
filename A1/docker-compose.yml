@@ -1,0 +1,24 @@
+services:
+  containerOne:
+    container_name: app1
+    image: anjalirachel/app1
+    ports:
+      - 6000:6000 # Map the internal port 6000 to the host port 6000
+    volumes:
+      - .:/app/data
+    networks:
+      - assignment1-network
+
+  containerTwo:
+    container_name: app2
+    image: anjalirachel/app2
+    ports:
+      - 7000:7000 # Map the internal port 7000 to the host port 7000
+    volumes:
+      - .:/app/data
+    networks:
+      - assignment1-network
+
+networks:
+  assignment1-network:
+    driver: bridge
