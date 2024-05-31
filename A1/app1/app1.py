@@ -1,31 +1,25 @@
-import os
-import requests
+# app1.py
 from flask import Flask, request, jsonify
+import requests
+import os
 
-app = Flask(__name__)
+app1 = Flask(__name__)
 
-@app.route("/calculate", methods=["POST"])
+@app1.route('/calculate', methods=['POST'])
 def calculate():
-    data = request.get_json()
+    data = request.json
 
-    # 1. Validate input JSON to ensure file name was provided
-    try:
-        if data["file"] is None:
-            return jsonify({"file": None, "error": "Invalid JSON input: 'file' parameter missing."}), 400
-    except KeyError:
-        return jsonify({"file": None, "error": "Invalid JSON input: 'file' parameter missing."}), 400
+    if not data or 'file' not in data or data['file'] is None:
+        return jsonify({"file": None, "error": "Invalid JSON input."})
 
-    # 2. Construct the relative path to the file from the parent directory
-    file_name = data["file"]
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files', file_name)
-    
-    # Verify that the file exists
-    if not os.path.isfile(file_path):
-        return jsonify({"file": file_name, "error": "File not found."}), 404
+    filename = os.path.join('/app', data['file'])
+    product = data.get('product', '')
 
-    # 3. Send the "file" and "product" parameters to Container 2 and return response
-    response = requests.post(url="http://app2_container:7000/sum", json=data, headers={'Content-Type': 'application/json'})
+    if not os.path.exists(filename):
+        return jsonify({"file": data['file'], "error": "File not found."})
+
+    response = requests.post('http://app2:7000/process', json={"file": filename, "product": product})
     return jsonify(response.json())
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=6000)
+if __name__ == '__main__':
+    app1.run(host='0.0.0.0', port=6000)

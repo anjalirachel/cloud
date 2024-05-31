@@ -1,5 +1,6 @@
 services:
-  app1_container:
+  app1:
+    build: ./app1
     image: anjalirachel/app1
     container_name: app1
     ports:
@@ -9,7 +10,8 @@ services:
     networks:
       - compose-networks
 
-  app2_container:
+  app2:
+    build: ./app2
     image: anjalirachel/app2
     container_name: app2
     ports:

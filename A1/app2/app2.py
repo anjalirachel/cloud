@@ -1,48 +1,29 @@
+# app2.py
+from flask import Flask, request, jsonify
 import csv
 import os
-from flask import Flask, request, jsonify
 
-app = Flask(__name__)
-app.config['JSON_SORT_KEYS'] = False
+app2 = Flask(__name__)
 
-@app.route("/sum", methods=["POST"])
-def sum_product():
-    data = request.get_json()
-    file = data.get("file")
-    product = data.get("product")
-    total_sum = 0
+@app2.route('/process', methods=['POST'])
+def process():
+    data = request.json
+    filename = data['file']
+    product = data['product']
 
-    # Construct the relative path to the file from the parent directory
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'files', file)
-    
+    if not os.path.exists(filename):
+        return jsonify({"file": filename, "error": "File not found."})
+
     try:
-        with open(file_path) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=',')
-            
-            for row in csv_reader:
-                if len(row) != 2:
-                    return jsonify({ 
-                        "file": file, 
-                        "error": "Input file not in CSV format." 
-                    }), 400
-                if row[0] == product:
-                    total_sum += int(row[1])
-
-    except FileNotFoundError:
-        return jsonify({ 
-            "file": file, 
-            "error": "File not found." 
-        }), 404
+        total = 0
+        with open(filename, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['product'] == product:
+                    total += int(row['amount'])
+        return jsonify({"file": filename, "sum": total})
     except Exception as e:
-        return jsonify({
-            "file": file,
-            "error": str(e)
-        }), 500
+        return jsonify({"file": filename, "error": "Input file not in CSV format."})
 
-    return jsonify({ 
-        "file": file, 
-        "sum": total_sum 
-    })
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=7000)
+if __name__ == '__main__':
+    app2.run(host='0.0.0.0', port=7000)
