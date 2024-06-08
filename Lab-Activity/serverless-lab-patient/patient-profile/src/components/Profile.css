@@ -1,0 +1,35 @@
+.card-profile {
+    margin-top: 50px;
+    width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid rgba(105, 136, 146, 0.6);
+    background-color:  rgba(52, 158, 190, 0.6);
+    border-radius: 10px;
+  }
+
+  .card-body{
+    background-color:  rgba(52, 158, 190, 0.6);
+    border-radius: 10px;
+  }
+  
+  .card-title-profile {
+    text-align: center;
+    padding: 5px;
+    font-family:"Merriweather", serif;
+    font-size: 70px;
+  }
+
+  .welcome{
+    float: left;
+    font-family: "Cookie", cursive;
+    font-weight: bold;
+    font-size: 70px;
+  }
+  
+  .card-text-profile {
+    margin-top: 20px; 
+    padding: 5px;
+    font-family: "Merriweather", serif;
+  }
+  
