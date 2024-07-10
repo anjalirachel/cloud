@@ -1,5 +1,3 @@
-
-
 # app2.py
 from flask import Flask, request, jsonify
 import csv
