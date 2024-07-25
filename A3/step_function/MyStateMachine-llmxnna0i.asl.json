@@ -1,0 +1,41 @@
+{
+  "StartAt": "ChoiceState",
+  "States": {
+    "ChoiceState": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.action",
+          "StringEquals": "bcrypt",
+          "Next": "InvokeBcryptLambda"
+        },
+        {
+          "Variable": "$.action",
+          "StringEquals": "md5",
+          "Next": "InvokeMd5Lambda"
+        },
+        {
+          "Variable": "$.action",
+          "StringEquals": "sha256",
+          "Next": "InvokeSha256Lambda"
+        }
+      ],
+      "Default": "InvokeSha256Lambda"
+    },
+    "InvokeBcryptLambda": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:137387558344:function:hashBcrypt",
+      "End": true
+    },
+    "InvokeMd5Lambda": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:137387558344:function:hashMD5",
+      "End": true
+    },
+    "InvokeSha256Lambda": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:137387558344:function:hashSHA256",
+      "End": true
+    }
+  }
+}
