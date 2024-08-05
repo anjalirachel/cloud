@@ -1,0 +1,85 @@
+# Node.js dependencies
+node_modules/
+
+# Build output
+build/
+dist/
+*.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# npm package lock file
+package-lock.json
+yarn.lock
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+
+# MacOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# System files
+*.pid
+*.seed
+*.pid.lock
+
+# Log files
+*.log
+
+# Build directories
+out/
+build/
+
+# Jest coverage
+coverage/
+
+# Yarn and NPM log files
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+lerna-debug.log*
+
+# Docker files
+Dockerfile
+docker-compose.yml
+
+# Next.js build output
+.next/
+
+# Firebase files
+.firebase/
+
+# React Native
+.expo/
+.expo-shared/
+
+# TypeScript
+*.tsbuildinfo
+*.d.ts
+
+# Miscellaneous
+*.bak
+*.swp
+*.swo
+*.swn
+*.tmp
+
+# AWS Lambda and other serverless files
+.serverless/

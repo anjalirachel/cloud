@@ -1,0 +1,51 @@
+/* PatientUpdate.css */
+
+/* Container for the update form */
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading style */
+  .heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Label style */
+  .label-update {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  /* Input control style */
+  .input-update {
+    font-size: 1rem;
+  }
+  
+  /* Button style */
+  .button-update {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+  }
+  
+  .button-update:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Text error style */
+  .text-danger {
+    color: #dc3545;
+  }
+  

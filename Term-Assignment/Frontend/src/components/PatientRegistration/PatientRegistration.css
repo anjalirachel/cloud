@@ -1,0 +1,21 @@
+.form-container {
+    margin-top: 20px;
+  }
+  
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .label-registration {
+    font-weight: bold;
+  }
+  
+  .input-registration {
+    margin-bottom: 10px;
+  }
+  
+  .button-registration {
+    width: 100%;
+  }
+  
