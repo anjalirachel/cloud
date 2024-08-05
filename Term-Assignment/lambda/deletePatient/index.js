@@ -8,7 +8,12 @@ exports.handler = async (event) => {
         return {
             statusCode: 400,
             body: JSON.stringify({ error: "Patient ID is required." }),
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                // "Access-Control-Allow-Headers": "*", 
+                // "Access-Control-Allow-Methods": "DELETE,OPTIONS"
+            },
         };
     }
 
@@ -22,14 +27,24 @@ exports.handler = async (event) => {
         return {
             statusCode: 200,
             body: JSON.stringify({ message: "Patient deleted successfully." }),
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                // "Access-Control-Allow-Headers": "*", 
+                // "Access-Control-Allow-Methods": "DELETE,OPTIONS"
+            },
         };
     } catch (error) {
         console.error("Error deleting patient:", error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: error.message }),
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                // "Access-Control-Allow-Headers": "*", 
+                // "Access-Control-Allow-Methods": "DELETE,OPTIONS"
+            },
         };
     }
 };

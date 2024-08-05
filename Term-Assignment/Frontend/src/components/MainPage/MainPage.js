@@ -24,9 +24,33 @@ const MainPage = () => {
           <br />
           <Button 
             variant="secondary" 
+            className="mb-3"
             onClick={() => handleNavigate('/update')}
           >
             Update Existing Patient
+          </Button>
+          <br />
+          <Button 
+            variant="info" 
+            className="mb-3"
+            onClick={() => handleNavigate('/delete')}
+          >
+            Delete Patient
+          </Button>
+          <br />
+          <Button 
+            variant="success" 
+            className="mb-3"
+            onClick={() => handleNavigate('/get-patient')}
+          >
+            Get Particular Patient
+          </Button>
+          <br />
+          <Button 
+            variant="warning" 
+            onClick={() => handleNavigate('/get-all-patients')}
+          >
+            Get All Patients
           </Button>
         </Col>
       </Row>

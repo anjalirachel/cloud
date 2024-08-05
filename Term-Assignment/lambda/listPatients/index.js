@@ -11,14 +11,24 @@ exports.handler = async (event) => {
         return {
             statusCode: 200,
             body: JSON.stringify(result.Items),
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                // "Access-Control-Allow-Headers": "*", 
+                // "Access-Control-Allow-Methods": "GET,OPTIONS"
+            },
         };
     } catch (error) {
         console.error("Error getting all patients:", error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: error.message }),
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", 
+                // "Access-Control-Allow-Headers": "*", 
+                // "Access-Control-Allow-Methods": "GET,OPTIONS"
+            },
         };
     }
 };
