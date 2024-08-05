@@ -147,4 +147,5 @@ const PatientUpdate = () => {
   );
 };
 
+
 export default PatientUpdate;
