@@ -1,0 +1,104 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template to create an API Gateway for Patient Management System
+
+Parameters:
+  ListPatientsFunction:
+    Description: ARN of the listPatients Lambda function
+    Type: String
+  CreatePatientFunction:
+    Description: ARN of the createPatient Lambda function
+    Type: String
+  UpdatePatientFunction:
+    Description: ARN of the updatePatient Lambda function
+    Type: String
+  DeletePatientFunction:
+    Description: ARN of the deletePatient Lambda function
+    Type: String
+  GetPatientFunction:
+    Description: ARN of the getPatient Lambda function
+    Type: String
+
+Resources:
+  PatientApi:
+    Type: 'AWS::ApiGateway::RestApi'
+    Properties:
+      Name: PatientApi
+
+  PatientsResource:
+    Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      ParentId: !GetAtt PatientApi.RootResourceId
+      PathPart: patients
+      RestApiId: !Ref PatientApi
+
+  PatientIdResource:
+    Type: 'AWS::ApiGateway::Resource'
+    Properties:
+      ParentId: !Ref PatientsResource
+      PathPart: '{patient_id}'
+      RestApiId: !Ref PatientApi
+
+  GetAllMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      ResourceId: !Ref PatientsResource
+      RestApiId: !Ref PatientApi
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ListPatientsFunction}/invocations
+
+  CreateMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: POST
+      ResourceId: !Ref PatientsResource
+      RestApiId: !Ref PatientApi
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CreatePatientFunction}/invocations
+
+  UpdateMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: PUT
+      ResourceId: !Ref PatientIdResource
+      RestApiId: !Ref PatientApi
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UpdatePatientFunction}/invocations
+
+  DeleteMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: DELETE
+      ResourceId: !Ref PatientIdResource
+      RestApiId: !Ref PatientApi
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DeletePatientFunction}/invocations
+
+  GetMethod:
+    Type: 'AWS::ApiGateway::Method'
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      ResourceId: !Ref PatientIdResource
+      RestApiId: !Ref PatientApi
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetPatientFunction}/invocations
+
+Outputs:
+  ApiEndpoint:
+    Description: URL of the API Gateway
+    Value: !Sub "https://${PatientApi}.execute-api.${AWS::Region}.amazonaws.com/dev"

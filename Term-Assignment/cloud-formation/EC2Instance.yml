@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template to create an EC2 instance and associate it with an existing Elastic IP
+
+Parameters:
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: String
+    Default: patient
+  ElasticIPAllocationId:
+    Description: Allocation ID of the existing Elastic IP
+    Type: String
+    Default: eipalloc-0cd63a93a95d40fa5
+
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      ImageId: ami-0ba9883b710b05ac6
+      SecurityGroupIds:
+        - sg-0c98700596709f873
+      SubnetId: subnet-0724eb156b6ee3e98
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          sudo yum update -y &&
+          sudo yum install -y git &&
+          sudo yum install -y nodejs &&
+          git clone https://github.com/anjalirachel/cloud.git &&
+          cd cloud/Term-Assignment/Frontend &&
+          sudo npm install &&
+          sudo npm start
+      Tags:
+        - Key: Name
+          Value: PatientEC2
+
+  ElasticIPAssociation:
+    Type: 'AWS::EC2::EIPAssociation'
+    Properties:
+      InstanceId: !Ref MyEC2Instance
+      AllocationId: !Ref ElasticIPAllocationId
+
+Outputs:
+  InstanceId:
+    Description: Instance Id of the newly created EC2 instance
+    Value: !Ref MyEC2Instance
+  PublicIP:
+    Description: Public IP address of the existing Elastic IP
+    Value: '52.5.221.18'
+  PublicDNS:
+    Description: Public DNS of the existing Elastic IP
+    Value: "ec2-52-5-221-18.compute-1.amazonaws.com"

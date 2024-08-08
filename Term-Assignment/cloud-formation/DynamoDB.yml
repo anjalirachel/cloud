@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template to create DynamoDB tables
+Resources:
+  PatientsTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: PatientsTable
+      AttributeDefinitions:
+        - AttributeName: patientId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: patientId
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  DoctorsTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: DoctorsTable
+      AttributeDefinitions:
+        - AttributeName: doctorId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: doctorId
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+Outputs:
+  PatientsTableName:
+    Description: The name of the Patients DynamoDB table
+    Value: !Ref PatientsTable
+  DoctorsTableName:
+    Description: The name of the Doctors DynamoDB table
+    Value: !Ref DoctorsTable

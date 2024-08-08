@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template to create Lambda functions
+Resources:
+  DeletePatientFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: deletePatientFunction
+      Handler: deletePatient/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: deletePatientFunction.zip
+      Runtime: nodejs20.x
+
+  UpdatePatientFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: updatePatientFunction
+      Handler: updatePatient/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: updatePatientFunction.zip
+      Runtime: nodejs20.x
+
+  GetPatientFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: getPatientFunction
+      Handler: getPatient/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: getPatientFunction.zip
+      Runtime: nodejs20.x
+
+  ListPatientsFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: listPatientsFunction
+      Handler: listPatients/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: listPatientsFunction.zip
+      Runtime: nodejs20.x
+
+  ReminderFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: ReminderFunction
+      Handler: reminder/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: reminderFunction.zip
+      Runtime: nodejs20.x
+
+  CreatePatientFunction:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: createPatientFunction
+      Handler: createPatient/index.handler
+      Role: arn:aws:iam::137387558344:role/LabRole
+      Code:
+        S3Bucket: cloud-patient-project
+        S3Key: createPatientFunction.zip
+      Runtime: nodejs20.x
+
+Outputs:
+  DeletePatientFunctionArn:
+    Description: ARN of the deletePatient Lambda function
+    Value: !GetAtt DeletePatientFunction.Arn
+  UpdatePatientFunctionArn:
+    Description: ARN of the updatePatient Lambda function
+    Value: !GetAtt UpdatePatientFunction.Arn
+  GetPatientFunctionArn:
+    Description: ARN of the getPatient Lambda function
+    Value: !GetAtt GetPatientFunction.Arn
+  ListPatientsFunctionArn:
+    Description: ARN of the listPatients Lambda function
+    Value: !GetAtt ListPatientsFunction.Arn
+  ReminderFunctionArn:
+    Description: ARN of the Reminder Lambda function
+    Value: !GetAtt ReminderFunction.Arn
+  CreatePatientFunctionArn:
+    Description: ARN of the createPatient Lambda function
+    Value: !GetAtt CreatePatientFunction.Arn
