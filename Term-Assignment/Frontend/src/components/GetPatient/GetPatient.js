@@ -15,7 +15,7 @@ const GetPatient = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'https://iz72w6q8ph.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id',
+        'https://n3rkuyywwe.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id',
         { patientId: patientId }, // Pass object directly
         {
           headers: {
