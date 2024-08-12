@@ -60,7 +60,7 @@ const PatientUpdate = () => {
 
       // Send the payload directly, without wrapping it in 'body'
       const response = await axios.put(
-        `https://iz72w6q8ph.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id`,
+        `https://n3rkuyywwe.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id`,
         updatePayload,
         {
           headers: {
