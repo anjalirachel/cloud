@@ -14,7 +14,7 @@ const DeletePatient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.delete(`https://iz72w6q8ph.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id`, {
+      const response = await axios.delete(`https://n3rkuyywwe.execute-api.us-east-1.amazonaws.com/dev/patients/patient_id`, {
         data: { patientId }
       });
       if (response.status === 200) {
