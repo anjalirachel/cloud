@@ -46,7 +46,7 @@ const Registration = () => {
 
   
       // Make the API request
-      const response = await axios.post('https://pvz882dfqc.execute-api.us-east-1.amazonaws.com/dev/patients', payload, {
+      const response = await axios.post('https://n3rkuyywwe.execute-api.us-east-1.amazonaws.com/dev/patients', payload, {
         headers: {
           'Content-Type': 'application/json',
         },
