@@ -9,7 +9,7 @@ const GetAllPatients = () => {
 
   const handleFetch = async () => {
     try {
-      const response = await axios.get('https://iz72w6q8ph.execute-api.us-east-1.amazonaws.com/dev/patients');
+      const response = await axios.get('https://n3rkuyywwe.execute-api.us-east-1.amazonaws.com/dev/patients');
       console.log('Fetched data:', response.data);
       const body=JSON.parse(response.data.body);
       console.log(body);
